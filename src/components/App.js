@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Layout, Col, Card, Modal, Typography, Button } from "antd";
+import { Col, Card, Modal, Button, Pagination } from "antd";
 import "antd/dist/antd.css";
-
-const { Header } = Layout;
-const TextTitle = Typography.Title;
 
 function App() {
   const [books, setBooks] = useState([]);
   const [booksDetails, setBooksDetails] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [id, setId] = useState(null);
+  const [pagination, setPagination] = useState(1);
+
   const handleOk = () => {
     setIsModalVisible(false);
   };
@@ -18,10 +17,14 @@ function App() {
     setIsModalVisible(false);
   };
 
+  const handlePagination = (page) => {
+    setPagination(page);
+  };
+
   useEffect(() => {
     const fetchBooks = async () => {
       const response = await fetch(
-        "https://stark-spire-22280.herokuapp.com/api/books"
+        `https://stark-spire-22280.herokuapp.com/api/books?page=${pagination}`
       );
       const json = await response.json();
       console.log("json", json);
@@ -30,7 +33,7 @@ function App() {
     };
 
     fetchBooks();
-  }, []);
+  }, [pagination]);
 
   useEffect(() => {
     const getBooksDetails = async () => {
@@ -49,13 +52,11 @@ function App() {
 
   return (
     <>
-      <Header>
+      <header>
         <div style={{ textAlign: "center" }}>
-          <TextTitle style={{ color: "#ffffff" }} level={3}>
-            LISTA DE LIBROS
-          </TextTitle>
+          <h1 style={{ color: "#000" }}>LISTA DE LIBROS</h1>
         </div>
-      </Header>
+      </header>
       {books
         ? books.map((book) => {
             return (
@@ -65,6 +66,7 @@ function App() {
                   width: 330,
                   display: "inline-block",
                   margin: 10,
+                  height: 400,
                 }}
               >
                 <div style={{ display: "flex" }}>
@@ -155,6 +157,9 @@ function App() {
           </Col>
         </div>
       </Modal>
+      <Col>
+        <Pagination defaultCurrent={1} total={50} onChange={handlePagination} />
+      </Col>
     </>
   );
 }
