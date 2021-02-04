@@ -54,7 +54,7 @@ function App() {
     <>
       <header>
         <div style={{ textAlign: "center" }}>
-          <h1 style={{ color: "#000" }}>LISTA DE LIBROS</h1>
+          <h2 style={{ color: "#000" }}>LISTA DE LIBROS</h2>
         </div>
       </header>
       {books
@@ -75,10 +75,7 @@ function App() {
                       <img
                         alt={book.title}
                         src={book.cover_page}
-                        style={{
-                          width: 100,
-                          height: 150,
-                        }}
+                        style={{ width: 100, height: 100 }}
                       />
                     </div>
                   </Col>
@@ -134,11 +131,7 @@ function App() {
               <img
                 alt={booksDetails.title}
                 src={booksDetails.cover_page}
-                style={{
-                  width: 100,
-                  height: 150,
-                  margin: 5,
-                }}
+                style={{ width: 100, height: 100, margin: 5 }}
               />
             </div>
           </Col>
@@ -147,11 +140,7 @@ function App() {
               <img
                 alt={booksDetails.title}
                 src={booksDetails.back_cover}
-                style={{
-                  width: 100,
-                  height: 150,
-                  margin: 5,
-                }}
+                style={{ width: 100, height: 100, margin: 5 }}
               />
             </div>
           </Col>
